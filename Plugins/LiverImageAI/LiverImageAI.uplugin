@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"FriendlyName": "Liver AI Analysis",
+	"Description": "AI-powered liver analysis plugin",
+	"Category": "Medical",
+	"CreatedBy": "NCCA Haoxiang Yang",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "LiverImageAI",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}
