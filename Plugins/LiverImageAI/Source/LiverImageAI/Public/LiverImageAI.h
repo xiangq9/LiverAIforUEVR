@@ -66,7 +66,7 @@ public:
 private:
     // UI Components
     TSharedPtr<SEditableTextBox> ServerURLText;
-    TSharedPtr<SEditableTextBox> CTFilePathText;
+    TSharedPtr<SEditableTextBox> MRIFilePathText;
     TSharedPtr<SEditableTextBox> LiverModelPathText;
     TSharedPtr<SEditableTextBox> VesselModelPathText;
     TSharedPtr<SEditableTextBox> TumorModelPathText;
@@ -98,7 +98,7 @@ private:
 
     // UI Event Handlers
     FReply OnTestServerConnectionClicked();
-    FReply OnBrowseCTFileClicked();
+    FReply OnBrowseMRIFileClicked();
     FReply OnBrowseLiverModelClicked();
     FReply OnBrowseVesselModelClicked();
     FReply OnBrowseTumorModelClicked();

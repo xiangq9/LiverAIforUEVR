@@ -23,7 +23,7 @@ from monai.losses import DiceCELoss
 from monai.networks.nets import SegResNet
 
 # Task configuration
-TASK_TYPE = "vessel"  # Modify this during training: "liver", "vessel", "tumor"
+TASK_TYPE = "liver"  # Modify this during training: "liver", "vessel", "tumor"
 
 # Windows compatibility settings
 if os.name == 'nt':

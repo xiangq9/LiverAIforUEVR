@@ -12,7 +12,7 @@
 DECLARE_DELEGATE_OneParam(FOnSliceChanged, int32);
 
 /**
- * Medical image slice viewer for CT/MRI visualization with mask overlay support
+ * Medical image slice viewer for MRI visualization with mask overlay support
  */
 class LIVERIMAGEAI_API SLiverSliceViewer : public SCompoundWidget
 {

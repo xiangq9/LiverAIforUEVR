@@ -14,7 +14,7 @@ struct LIVERIMAGEAI_API FLiverAnalysisRequest
     GENERATED_BODY()
 
     UPROPERTY(BlueprintReadOnly)
-    FString CTFilePath;
+    FString MRIFilePath;
 
     UPROPERTY(BlueprintReadOnly)
     FString LiverModelPath;
@@ -33,7 +33,7 @@ struct LIVERIMAGEAI_API FLiverAnalysisRequest
 
     FLiverAnalysisRequest()
     {
-        CTFilePath = TEXT("");
+        MRIFilePath = TEXT("");
         LiverModelPath = TEXT("");
         VesselModelPath = TEXT("");
         TumorModelPath = TEXT("");

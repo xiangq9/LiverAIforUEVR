@@ -71,7 +71,7 @@ void ULiverAIHttpClient::SendAnalysisRequest(const FLiverAnalysisRequest& Reques
     
     // Build JSON payload
     TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject);
-    JsonObject->SetStringField(TEXT("ct_file_path"), Request.CTFilePath);
+    JsonObject->SetStringField(TEXT("mri_file_path"), Request.MRIFilePath);
     JsonObject->SetStringField(TEXT("liver_model_path"), Request.LiverModelPath);
     JsonObject->SetStringField(TEXT("vessel_model_path"), Request.VesselModelPath);
     JsonObject->SetStringField(TEXT("tumor_model_path"), Request.TumorModelPath);

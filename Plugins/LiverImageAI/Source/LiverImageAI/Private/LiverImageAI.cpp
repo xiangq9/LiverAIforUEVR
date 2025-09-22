@@ -167,7 +167,7 @@ void SLiverAIWidget::Construct(const FArguments& InArgs)
 			]
 		]
 		
-		// CT file selection
+		// MRI file selection
 		+ SVerticalBox::Slot()
 		.AutoHeight()
 		.Padding(10, 5)
@@ -177,20 +177,20 @@ void SLiverAIWidget::Construct(const FArguments& InArgs)
 			.FillWidth(0.3f)
 			[
 				SNew(STextBlock)
-				.Text(LOCTEXT("CTFileLabel", "CT File:"))
+				.Text(LOCTEXT("MRIFileLabel", "MRI File:"))
 			]
 			+ SHorizontalBox::Slot()
 			.FillWidth(0.5f)
 			[
-				SAssignNew(CTFilePathText, SEditableTextBox)
-				.HintText(LOCTEXT("CTFileHint", "Select CT file..."))
+				SAssignNew(MRIFilePathText, SEditableTextBox)
+				.HintText(LOCTEXT("MRIFileHint", "Select MRI file..."))
 			]
 			+ SHorizontalBox::Slot()
 			.FillWidth(0.2f)
 			[
 				SNew(SButton)
 				.Text(LOCTEXT("BrowseButton", "Browse"))
-				.OnClicked(this, &SLiverAIWidget::OnBrowseCTFileClicked)
+				.OnClicked(this, &SLiverAIWidget::OnBrowseMRIFileClicked)
 			]
 		]
 		
@@ -367,7 +367,7 @@ void SLiverAIWidget::Construct(const FArguments& InArgs)
 						.Padding(5)
 						[
 							SNew(STextBlock)
-							.Text(LOCTEXT("OriginalImageLabel", "Original CT Image"))
+							.Text(LOCTEXT("OriginalImageLabel", "Original MRI Image"))
 							.Font(FCoreStyle::GetDefaultFontStyle("Bold", 11))
 							.Justification(ETextJustify::Center)
 						]
@@ -502,7 +502,7 @@ void SLiverAIWidget::Construct(const FArguments& InArgs)
 					// Fix scroll wheel issue: use SMultiLineEditableTextBox's built-in scrolling
 					SAssignNew(DiagnosticResultsText, SMultiLineEditableTextBox)
 					.IsReadOnly(true)
-					.Text(LOCTEXT("NoResultsYet", "No analysis results yet. Please load a CT file and run AI analysis to view diagnostic report."))
+					.Text(LOCTEXT("NoResultsYet", "No analysis results yet. Please load a MRI file and run AI analysis to view diagnostic report."))
 					.Font(FCoreStyle::GetDefaultFontStyle("Mono", 8))
 					.AllowContextMenu(false)
 					.AlwaysShowScrollbars(true)
@@ -529,7 +529,6 @@ void SLiverAIWidget::Construct(const FArguments& InArgs)
 	// Initial state update
 	UpdateRunButtonState();
 }
-
 // New method: Setup slice viewer synchronization
 void SLiverAIWidget::SetupSliceViewerSync()
 {
@@ -680,7 +679,7 @@ void SLiverAIWidget::SendAnalysisRequest()
 
 	// Build JSON request data
 	TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject);
-	JsonObject->SetStringField(TEXT("ct_file_path"), CTFilePathText->GetText().ToString());
+	JsonObject->SetStringField(TEXT("mri_file_path"), MRIFilePathText->GetText().ToString());
 	JsonObject->SetStringField(TEXT("liver_model_path"), LiverModelPathText->GetText().ToString());
 	JsonObject->SetStringField(TEXT("vessel_model_path"), VesselModelPathText->GetText().ToString());
 	JsonObject->SetStringField(TEXT("tumor_model_path"), TumorModelPathText->GetText().ToString());
@@ -706,14 +705,14 @@ void SLiverAIWidget::SendAnalysisRequest()
 // Validate input files
 bool SLiverAIWidget::ValidateInputFiles()
 {
-	FString CTPath = CTFilePathText->GetText().ToString();
+	FString MRIPath = MRIFilePathText->GetText().ToString();
 	FString LiverPath = LiverModelPathText->GetText().ToString();
 	FString VesselPath = VesselModelPathText->GetText().ToString();
 	FString TumorPath = TumorModelPathText->GetText().ToString();
 	
-	if (CTPath.IsEmpty())
+	if (MRIPath.IsEmpty())
 	{
-		UpdateStatusText(TEXT("Error: Please select CT file"));
+		UpdateStatusText(TEXT("Error: Please select MRI file"));
 		return false;
 	}
 	
@@ -736,9 +735,9 @@ bool SLiverAIWidget::ValidateInputFiles()
 	}
 	
 	// Check if files exist
-	if (!FPlatformFileManager::Get().GetPlatformFile().FileExists(*CTPath))
+	if (!FPlatformFileManager::Get().GetPlatformFile().FileExists(*MRIPath))
 	{
-		UpdateStatusText(TEXT("Error: CT file does not exist, please reselect"));
+		UpdateStatusText(TEXT("Error: MRI file does not exist, please reselect"));
 		return false;
 	}
 	
@@ -791,18 +790,18 @@ FReply SLiverAIWidget::LoadTestResultFromFile()
 	return FReply::Handled();
 }
 
-FReply SLiverAIWidget::OnBrowseCTFileClicked()
+FReply SLiverAIWidget::OnBrowseMRIFileClicked()
 {
 	FString Filename;
-	if (OpenFileDialog(TEXT("Select CT File"), TEXT("CT Files (*.nii;*.nii.gz;*.dcm)|*.nii;*.nii.gz;*.dcm"), Filename))
+	if (OpenFileDialog(TEXT("Select MRI File"), TEXT("MRI Files (*.nii;*.nii.gz;*.dcm)|*.nii;*.nii.gz;*.dcm"), Filename))
 	{
-		CTFilePathText->SetText(FText::FromString(Filename));
-		UpdateStatusText(FString::Printf(TEXT("CT file selected: %s"), *FPaths::GetCleanFilename(Filename)));
+		MRIFilePathText->SetText(FText::FromString(Filename));
+		UpdateStatusText(FString::Printf(TEXT("MRI file selected: %s"), *FPaths::GetCleanFilename(Filename)));
 		UpdateRunButtonState();
 	}
 	else
 	{
-		UpdateStatusText(TEXT("CT file selection cancelled"));
+		UpdateStatusText(TEXT("MRI file selection cancelled"));
 	}
 	return FReply::Handled();
 }
@@ -933,7 +932,6 @@ void SLiverAIWidget::TestServerConnection()
 		UpdateStatusText(TEXT("Connecting to server..."));
 	}
 }
-
 // Analysis request response handler
 void SLiverAIWidget::OnAnalysisRequestResponse(TSharedPtr<IHttpRequest, ESPMode::ThreadSafe> Request, TSharedPtr<IHttpResponse, ESPMode::ThreadSafe> Response, bool bWasSuccessful)
 {
@@ -1177,13 +1175,13 @@ void SLiverAIWidget::OnHttpRequestComplete(TSharedPtr<IHttpRequest, ESPMode::Thr
 
 void SLiverAIWidget::UpdateRunButtonState()
 {
-	FString CTPath = CTFilePathText->GetText().ToString();
+	FString MRIPath = MRIFilePathText->GetText().ToString();
 	FString LiverPath = LiverModelPathText->GetText().ToString();
 	FString VesselPath = VesselModelPathText->GetText().ToString();
 	FString TumorPath = TumorModelPathText->GetText().ToString();
 	
 	bool bCanRun = bServerHealthy && 
-				   !CTPath.IsEmpty() && 
+				   !MRIPath.IsEmpty() && 
 				   !LiverPath.IsEmpty() && 
 				   !VesselPath.IsEmpty() &&
 				   !TumorPath.IsEmpty() &&
@@ -1461,6 +1459,7 @@ void SLiverAIWidget::ShowAnalysisResults(const FString& Results)
     UpdateStatusText(DisplayText);
 }
 
+// Continue in next file...
 void SLiverAIWidget::GenerateTestCube()
 {
 	UE_LOG(LogLiverAI, Warning, TEXT("=== GenerateTestCube called ==="));
