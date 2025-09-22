@@ -1,4 +1,4 @@
-# Liver AI Analysis System with Unreal Engine 5 Integration
+# UE Plugin Integrating AI Automatic Segmentation and 3D Reconstruction of Liver MRI Images  for VR
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/)
@@ -46,8 +46,8 @@ An advanced AI-powered liver analysis system that combines deep learning medical
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/liver-ai-analysis.git
-cd liver-ai-analysis
+git clone https://github.com/xiangq9/LiverAIforUEVR
+cd LiverAIforUEVR
 
 # Create virtual environment (recommended using uv)
 pip install uv
@@ -55,7 +55,7 @@ uv venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install dependencies
-uv pip install -r requirements.txt
+uv sync
 ```
 
 ### 2. Install AI Models
@@ -64,9 +64,9 @@ Download pre-trained models or train your own:
 
 ```bash
 # Download pre-trained models
-python download_models.py
+GitHub has size limitations.
 
-# Or train your own models
+# Train your own models
 python AISegInference/multiliver_training.py
 ```
 
@@ -277,19 +277,19 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact
 
 For questions and support, please open an issue on GitHub or contact:
-- Project Lead: [Your Name]
-- Email: [your.email@example.com]
+- Project Lead: [Haoxiang Yang]
+- Email: [xiangq918@gmail.com]
 
 ## 📚 Citation
 
 If you use this project in your research, please cite:
 
 ```bibtex
-@software{liver_ai_analysis_2025,
-  title = {Liver AI Analysis System with Unreal Engine Integration},
-  author = {Your Name},
+@software{LiverAIforUEVR,
+  title = {UE Plugin Integrating AI Automatic Segmentation and 3D Reconstruction of Liver MRI Images  for VR},
+  author = {NCCA - Haoxiang Yang},
   year = {2025},
-  url = {https://github.com/yourusername/liver-ai-analysis}
+  url = {https://github.com/xiangq9/LiverAIforUEVR}
 }
 ```
 
