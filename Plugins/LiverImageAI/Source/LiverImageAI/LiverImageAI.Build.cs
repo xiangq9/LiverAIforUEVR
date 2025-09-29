@@ -33,5 +33,16 @@ public class LiverImageAI : ModuleRules
             "Projects",
             "EditorWidgets"
         });
+
+        // Explicitly specify source files for the modular structure
+        PublicIncludePaths.AddRange(new string[] 
+        {
+            "LiverImageAI/Public"
+        });
+
+        PrivateIncludePaths.AddRange(new string[] 
+        {
+            "LiverImageAI/Private"
+        });
     }
 }

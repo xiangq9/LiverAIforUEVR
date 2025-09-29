@@ -1,5 +1,5 @@
 #include "SLiverSliceViewer.h"
-#include "LiverAITypes.h"  // Add this line for LogLiverAI declaration
+#include "Types/LiverAITypes.h"  
 #include "Engine/Texture2DDynamic.h"
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/Layout/SBox.h"

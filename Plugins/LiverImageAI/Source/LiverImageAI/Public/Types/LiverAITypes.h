@@ -1,13 +1,10 @@
 #pragma once
-
 #include "CoreMinimal.h"
 #include "Engine/Engine.h"
 #include "LiverAITypes.generated.h"
 
-// Declare log category
 DECLARE_LOG_CATEGORY_EXTERN(LogLiverAI, Log, All);
 
-// Analysis request structure - added missing structure
 USTRUCT(BlueprintType)
 struct LIVERIMAGEAI_API FLiverAnalysisRequest
 {
@@ -42,7 +39,6 @@ struct LIVERIMAGEAI_API FLiverAnalysisRequest
     }
 };
 
-// Analysis progress structure - added missing structure
 USTRUCT(BlueprintType)
 struct LIVERIMAGEAI_API FAnalysisProgress
 {
@@ -69,7 +65,6 @@ struct LIVERIMAGEAI_API FAnalysisProgress
     }
 };
 
-// Organ volume statistics structure
 USTRUCT(BlueprintType)
 struct LIVERIMAGEAI_API FOrganVolumeStats
 {
@@ -96,7 +91,6 @@ struct LIVERIMAGEAI_API FOrganVolumeStats
     }
 };
 
-// Mesh data structure
 USTRUCT(BlueprintType)
 struct LIVERIMAGEAI_API FMeshData
 {
@@ -121,7 +115,6 @@ struct LIVERIMAGEAI_API FMeshData
     }
 };
 
-// Liver analysis result structure
 USTRUCT(BlueprintType)
 struct LIVERIMAGEAI_API FLiverAnalysisResult
 {
@@ -146,7 +139,7 @@ struct LIVERIMAGEAI_API FLiverAnalysisResult
     FString ErrorMessage;
 
     UPROPERTY(BlueprintReadOnly)
-    FString ResultSummary;  // Added missing field
+    FString ResultSummary;
 
     FLiverAnalysisResult()
     {
@@ -154,6 +147,6 @@ struct LIVERIMAGEAI_API FLiverAnalysisResult
         Timestamp = TEXT("");
         bSuccess = false;
         ErrorMessage = TEXT("");
-        ResultSummary = TEXT("");  // Initialize
+        ResultSummary = TEXT("");
     }
 };
